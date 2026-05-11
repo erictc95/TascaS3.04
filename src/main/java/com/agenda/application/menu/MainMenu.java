@@ -13,10 +13,11 @@ public class MainMenu {
 
             System.out.println("--> WELCOME TO YOUR CLI AGENDA <--");
             System.out.println();
-            System.out.println("1. Manage tasks");
-            System.out.println("2. Manage events");
-            System.out.println("3. Manage notes");
+            System.out.println("1. Manage Tasks");
+            System.out.println("2. Manage Events");
+            System.out.println("3. Manage Notes");
             System.out.println("0. Exit");
+            System.out.println();
             System.out.print("Select an option: ");
 
             option = scanner.nextInt();

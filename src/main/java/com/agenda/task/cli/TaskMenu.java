@@ -1,4 +1,4 @@
-package com.agenda.application.menu;
+package com.agenda.task.cli;
 
 import java.util.Scanner;
 

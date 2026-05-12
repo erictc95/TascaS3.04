@@ -1,5 +1,9 @@
 package com.agenda.application.menu;
 
+import com.agenda.event.cli.EventMenu;
+import com.agenda.note.cli.NoteMenu;
+import com.agenda.task.cli.TaskMenu;
+
 import java.util.Scanner;
 
 public class MainMenu {

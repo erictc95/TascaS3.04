@@ -1,4 +1,4 @@
-package com.agenda.application.menu;
+package com.agenda.note.cli;
 
 import java.util.Scanner;
 

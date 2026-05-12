@@ -1,4 +1,4 @@
-package com.agenda.application.menu;
+package com.agenda.event.cli;
 
 import java.util.Scanner;
 
@@ -29,12 +29,15 @@ public class EventMenu {
             switch (option) {
                 case 1:
                     System.out.println("Creating Event...");
+                    createEvent();
                     break;
                 case 2:
                     System.out.println("Listing Events...");
+                    listTasks();
                     break;
                 case 3:
                     System.out.println("Updating Event...");
+
                     break;
                 case 4:
                     System.out.println("Deleting Event...");
@@ -51,5 +54,11 @@ public class EventMenu {
 
         } while (option != 0);
 
+    }
+
+    private void listTasks() {
+    }
+
+    private void createEvent() {
     }
 }

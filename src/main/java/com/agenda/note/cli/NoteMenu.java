@@ -1,12 +1,18 @@
 package com.agenda.note.cli;
 
+import com.agenda.note.model.Note;
+import com.agenda.note.repository.NoteRepository;
 import com.agenda.note.service.NoteService;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class NoteMenu {
 
     private static Scanner scanner = new Scanner(System.in);
+    private NoteService noteService = new NoteService();
 
     public void show() {
 
@@ -31,7 +37,6 @@ public class NoteMenu {
             switch (option) {
                 case 1:
                     createNote();
-                    System.out.println("Creating Note");
                     break;
                 case 2:
                     listNotes();
@@ -46,7 +51,7 @@ public class NoteMenu {
                     System.out.println("Deleting Note");
                     break;
                 case 5:
-                    searchNote();
+                    searchMenu();
                     System.out.println("Searching Note");
                     break;
                 case 0:
@@ -60,6 +65,7 @@ public class NoteMenu {
 
     }
 
+
     private void createNote() {
         System.out.println("Title: ");
         String title = scanner.nextLine();
@@ -67,22 +73,134 @@ public class NoteMenu {
         System.out.println("Description: ");
         String description = scanner.nextLine();
 
-
+        noteService.createNote(title, description);
     }
 
     private void listNotes() {
+        System.out.println("List of Notes: ");
+        List<Note> theList = noteService.getAllNotes();
 
+        showNotesList(theList);
     }
 
     private void updateNote() {
+        UUID noteId = askValidUUID();
 
+        System.out.println("New Title: ");
+        String newTitle = scanner.nextLine();
+
+        System.out.println("New Description");
+        String newDescription = scanner.nextLine();
+
+        noteService.updateNote(noteId, newTitle, newDescription);
+    }
+
+    private UUID askValidUUID() {
+        UUID noteId;
+        do {
+            System.out.println("UUID?: ");
+            String uuidString = scanner.nextLine();
+
+            noteId = convertStringToUUIDNumber(uuidString);
+        } while (noteId == null);
+
+        return noteId;
+    }
+
+    private UUID convertStringToUUIDNumber(String stringToUuid) {
+        UUID noteUUID = null;
+        try {
+            noteUUID = UUID.fromString(stringToUuid);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: the text received isn't a UUID valid! " + e);
+        }
+        return noteUUID;
     }
 
     private void deleteNote() {
+        UUID noteId = askValidUUID();
 
+        noteService.deleteNote(noteId);
     }
 
-    private void searchNote() {
+    private void searchMenu() {
+        int option;
 
+        do {
+
+            System.out.println("--> SEARCH MENU <--");
+            System.out.println();
+            System.out.println("1. Search Note by Id");
+            System.out.println("2. Search Note by Title");
+            System.out.println("3. Search Note by Word");
+            System.out.println("0. Back");
+            System.out.println();
+            System.out.print("Select an option: ");
+
+            option = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (option) {
+                case 1:
+                    searchById();
+                    break;
+                case 2:
+                    searchByTitle();
+                    break;
+                case 3:
+                    searchByWord();
+                    break;
+                case 0:
+                    System.out.println("Going Back");
+                    break;
+                default:
+                    System.out.println("Invalid Option. Try again.");
+            }
+
+        } while (option != 0);
+    }
+
+    private void searchById() {
+        UUID noteId = askValidUUID();
+
+        Note resultNote;
+
+        resultNote = noteService.findById(noteId);
+
+        if (resultNote != null) {
+            System.out.println(resultNote);
+        } else {
+            System.out.println("Note not found!");
+        }
+    }
+
+    private void searchByTitle() {
+        System.out.println("Enter the Title of Note to Search: ");
+        String title = scanner.nextLine();
+
+        List<Note> foundList = noteService.findByTitle(title);
+
+        showNotesList(foundList);
+    }
+
+    private void searchByWord() {
+        System.out.println("Enter the Words of Note to Search: ");
+        String word = scanner.nextLine();
+
+        List<Note> foundList = noteService.findByWord(word);
+
+        showNotesList(foundList);
+    }
+
+    private void printNotesList(List<Note> foundNotes) {
+        foundNotes.forEach(System.out::println);
+    }
+
+    private void showNotesList (List<Note> allNotes) {
+        if (allNotes.isEmpty()) {
+            System.out.println("The List is Empty");
+        } else {
+            printNotesList(allNotes);
+        }
     }
 }

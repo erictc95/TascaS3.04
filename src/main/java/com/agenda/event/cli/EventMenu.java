@@ -33,7 +33,7 @@ public class EventMenu {
                     break;
                 case 2:
                     System.out.println("Listing Events...");
-                    listTasks();
+                    listEvents();
                     break;
                 case 3:
                     System.out.println("Updating Event...");
@@ -56,9 +56,9 @@ public class EventMenu {
 
     }
 
-    private void listTasks() {
+    private void createEvent() {
     }
 
-    private void createEvent() {
+    private void listEvents() {
     }
 }

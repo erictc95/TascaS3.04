@@ -1,5 +1,7 @@
 package com.agenda.note.cli;
 
+import com.agenda.note.service.NoteService;
+
 import java.util.Scanner;
 
 public class NoteMenu {
@@ -28,18 +30,23 @@ public class NoteMenu {
 
             switch (option) {
                 case 1:
+                    createNote();
                     System.out.println("Creating Note");
                     break;
                 case 2:
+                    listNotes();
                     System.out.println("Listing Notes");
                     break;
                 case 3:
+                    updateNote();
                     System.out.println("Updating Note");
                     break;
                 case 4:
+                    deleteNote();
                     System.out.println("Deleting Note");
                     break;
                 case 5:
+                    searchNote();
                     System.out.println("Searching Note");
                     break;
                 case 0:
@@ -50,6 +57,32 @@ public class NoteMenu {
             }
 
         } while (option != 0);
+
+    }
+
+    private void createNote() {
+        System.out.println("Title: ");
+        String title = scanner.nextLine();
+
+        System.out.println("Description: ");
+        String description = scanner.nextLine();
+
+
+    }
+
+    private void listNotes() {
+
+    }
+
+    private void updateNote() {
+
+    }
+
+    private void deleteNote() {
+
+    }
+
+    private void searchNote() {
 
     }
 }

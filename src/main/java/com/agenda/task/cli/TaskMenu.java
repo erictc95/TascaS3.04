@@ -31,7 +31,6 @@ public class TaskMenu {
 
             switch (option) {
                 case 1:
-
                     System.out.println("Creating Task...");
                     break;
                 case 2:

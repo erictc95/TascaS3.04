@@ -12,13 +12,16 @@ public class TaskMenu {
 
         do {
 
-            System.out.println("--> WELCOME TO YOUR CLI AGENDA <--");
+            System.out.println("--> TASK MENU <--");
             System.out.println();
-            System.out.println("1. Manage Tasks");
-            System.out.println("2. Manage Events");
-            System.out.println("3. Manage Notes");
-            System.out.println("4. Manage Events");
-            System.out.println("5. Manage Notes");
+            System.out.println("1. Create Task");
+            System.out.println("2. List Tasks");
+            System.out.println("3. Update Task");
+            System.out.println("4. Delete Task");
+            System.out.println("5. Mark Task as Completed");
+            System.out.println("6. Filter Task by Priority");
+            System.out.println("7. Filter Task by State");
+            System.out.println("8. Filter Task by Date Proximity");
             System.out.println("0. Back");
             System.out.println();
             System.out.print("Select an option: ");
@@ -29,18 +32,28 @@ public class TaskMenu {
             switch (option) {
                 case 1:
 
+                    System.out.println("Creating Task...");
                     break;
                 case 2:
-
+                    System.out.println("Listing Tasks...");
                     break;
                 case 3:
-
+                    System.out.println("Updating Task...");
                     break;
                 case 4:
-
+                    System.out.println("Deleting Task...");
                     break;
                 case 5:
-
+                    System.out.println("Marked Task...");
+                    break;
+                case 6:
+                    System.out.println("Filtering Task...");
+                    break;
+                case 7:
+                    System.out.println("Filtering Task...");
+                    break;
+                case 8:
+                    System.out.println("Filtering Task...");
                     break;
                 case 0:
                     System.out.println("Going Back");

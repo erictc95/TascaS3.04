@@ -12,13 +12,13 @@ public class EventMenu {
 
         do {
 
-            System.out.println("--> WELCOME TO YOUR CLI AGENDA <--");
+            System.out.println("--> EVENT MENU <--");
             System.out.println();
-            System.out.println("1. Manage Tasks");
-            System.out.println("2. Manage Events");
-            System.out.println("3. Manage Notes");
-            System.out.println("4. Manage Events");
-            System.out.println("5. Manage Notes");
+            System.out.println("1. Create Event");
+            System.out.println("2. List Events");
+            System.out.println("3. Update Event");
+            System.out.println("4. Delete Events");
+            System.out.println("5. Search Event by Date");
             System.out.println("0. Back");
             System.out.println();
             System.out.print("Select an option: ");
@@ -28,19 +28,19 @@ public class EventMenu {
 
             switch (option) {
                 case 1:
-
+                    System.out.println("Creating Event...");
                     break;
                 case 2:
-
+                    System.out.println("Listing Events...");
                     break;
                 case 3:
-
+                    System.out.println("Updating Event...");
                     break;
                 case 4:
-
+                    System.out.println("Deleting Event...");
                     break;
                 case 5:
-
+                    System.out.println("Searching Event...");
                     break;
                 case 0:
                     System.out.println("Going Back");

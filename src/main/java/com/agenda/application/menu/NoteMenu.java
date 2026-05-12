@@ -12,13 +12,13 @@ public class NoteMenu {
 
         do {
 
-            System.out.println("--> WELCOME TO YOUR CLI AGENDA <--");
+            System.out.println("--> NOTE MENU <--");
             System.out.println();
-            System.out.println("1. Manage Tasks");
-            System.out.println("2. Manage Events");
-            System.out.println("3. Manage Notes");
-            System.out.println("4. Manage Events");
-            System.out.println("5. Manage Notes");
+            System.out.println("1. Create Note");
+            System.out.println("2. List Notes");
+            System.out.println("3. Update Note");
+            System.out.println("4. Delete Note");
+            System.out.println("5. Search Note");
             System.out.println("0. Back");
             System.out.println();
             System.out.print("Select an option: ");
@@ -28,19 +28,19 @@ public class NoteMenu {
 
             switch (option) {
                 case 1:
-
+                    System.out.println("Creating Note");
                     break;
                 case 2:
-
+                    System.out.println("Listing Notes");
                     break;
                 case 3:
-
+                    System.out.println("Updating Note");
                     break;
                 case 4:
-
+                    System.out.println("Deleting Note");
                     break;
                 case 5:
-
+                    System.out.println("Searching Note");
                     break;
                 case 0:
                     System.out.println("Going Back");

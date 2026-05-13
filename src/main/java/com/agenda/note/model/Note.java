@@ -1,24 +1,25 @@
 package com.agenda.note.model;
 
-import java.util.UUID;
 
 public class Note {
 
-    private UUID id;
+    private Long id;
     private String title;
     private String description;
+    private Long taskId;
 
-    public Note(UUID id, String title, String description) {
+    public Note(Long id, String title, String description, Long taskId) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.taskId = taskId;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -38,12 +39,21 @@ public class Note {
         this.description = description;
     }
 
+    public Long getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
+    }
+
     @Override
     public String toString() {
         return "Note{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", taskId=" + taskId +
                 '}';
     }
 }

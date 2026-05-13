@@ -10,24 +10,24 @@ public class NoteService {
 
     NoteRepository noteRepository = new NoteRepository();
 
-    public void createNote(String title, String description) {
-        noteRepository.saveNote(new Note(UUID.randomUUID(), title, description));
+    public void createNote(String title, String description, Long taskId) {
+        noteRepository.saveNote(new Note(null, title, description, taskId));
     }
 
     public List<Note> getAllNotes() {
         return noteRepository.findAll();
     }
 
-    public void updateNote(UUID id, String newTitle, String newDescription) {
-        noteRepository.updateNote(new Note(id, newTitle, newDescription));
+    public void updateNote(Long noteId, String newTitle, String newDescription) {
+        noteRepository.updateNote(new Note(noteId, newTitle, newDescription, null));
     }
 
-    public void deleteNote(UUID id) {
-        noteRepository.deleteNote(id);
+    public void deleteNote(Long noteId) {
+        noteRepository.deleteNote(noteId);
     }
 
-    public Note findById(UUID id) {
-        return noteRepository.findById(id);
+    public Note findById(Long noteId) {
+        return noteRepository.findById(noteId);
     }
 
     public List<Note> findByTitle(String title) {

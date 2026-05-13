@@ -5,7 +5,7 @@ import com.agenda.note.model.Note;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
+
 
 public class NoteRepository {
 
@@ -28,12 +28,12 @@ public class NoteRepository {
         }
     }
 
-    public void deleteNote(UUID id) {
-        notes.removeIf(note -> note.getId().equals(id));
+    public void deleteNote(Long noteId) {
+        notes.removeIf(note -> note.getId().equals(noteId));
     }
 
-    public Note findById(UUID id) {
-        return notes.stream().filter(note -> note.getId().equals(id)).findFirst().orElse(null);
+    public Note findById(Long noteId) {
+        return notes.stream().filter(note -> note.getId().equals(noteId)).findFirst().orElse(null);
     }
 
     public List<Note> findByTitle(String title) {

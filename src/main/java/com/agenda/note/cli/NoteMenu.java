@@ -1,13 +1,10 @@
 package com.agenda.note.cli;
 
 import com.agenda.note.model.Note;
-import com.agenda.note.repository.NoteRepository;
 import com.agenda.note.service.NoteService;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
-import java.util.UUID;
 
 public class NoteMenu {
 
@@ -73,7 +70,10 @@ public class NoteMenu {
         System.out.println("Description: ");
         String description = scanner.nextLine();
 
-        noteService.createNote(title, description);
+        System.out.println("Task id:");
+        Long taskId = scanner.nextLong();
+
+        noteService.createNote(title, description, taskId);
     }
 
     private void listNotes() {
@@ -84,7 +84,8 @@ public class NoteMenu {
     }
 
     private void updateNote() {
-        UUID noteId = askValidUUID();
+        System.out.println("Note Id?");
+        Long noteId = scanner.nextLong();
 
         System.out.println("New Title: ");
         String newTitle = scanner.nextLine();
@@ -95,30 +96,13 @@ public class NoteMenu {
         noteService.updateNote(noteId, newTitle, newDescription);
     }
 
-    private UUID askValidUUID() {
-        UUID noteId;
-        do {
-            System.out.println("UUID?: ");
-            String uuidString = scanner.nextLine();
-
-            noteId = convertStringToUUIDNumber(uuidString);
-        } while (noteId == null);
-
-        return noteId;
+    private void validateLongNumber() {
+        Long noteId;
     }
 
-    private UUID convertStringToUUIDNumber(String stringToUuid) {
-        UUID noteUUID = null;
-        try {
-            noteUUID = UUID.fromString(stringToUuid);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: the text received isn't a UUID valid! " + e);
-        }
-        return noteUUID;
-    }
 
     private void deleteNote() {
-        UUID noteId = askValidUUID();
+        Long noteId = null;
 
         noteService.deleteNote(noteId);
     }
@@ -161,7 +145,7 @@ public class NoteMenu {
     }
 
     private void searchById() {
-        UUID noteId = askValidUUID();
+        Long noteId = null;
 
         Note resultNote;
 

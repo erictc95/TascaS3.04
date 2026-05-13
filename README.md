@@ -133,6 +133,70 @@ sql/
   init.sql
 ```
 
+# Database Diagram
+
+## Tables
+
+### `event`
+
+| Column                       | Type            | Description |
+|------------------------------|-----------------|-------------|
+| `event_id`                   | INT (PK)        | Unique event identifier |
+| `event_name`                 | VARCHAR(100)    | Event name |
+| `event_description`          | LONGTEXT        | Event description |
+| `event_start`                | DATETIME        | Event start date and time |
+| `event_end`                  | DATETIME        | Event end date and time |
+| `event_location`             | VARCHAR(100)    | Event location |
+| `event_repeat_type`          | ENUM(...)       | Repeat type |
+| `event_custom_repeat`        | INT             | Custom repeat interval |
+| `event_notification_minutes` | INT             | Notification time in minutes |
+| `event_status`               | ENUM(...)       | Event status |
+| `event_created_at`           | DATETIME        | Creation timestamp |
+
+---
+
+### `task`
+
+| Column             | Type            | Description |
+|--------------------|-----------------|-------------|
+| `task_id`          | INT (PK)        | Unique task identifier |
+| `task_title`       | VARCHAR(100)    | Task title |
+| `task_description` | LONGTEXT        | Task description |
+| `task_due_at`      | DATETIME        | Due date and time |
+| `task_priority`    | ENUM(...)       | Task priority |
+| `task_status`      | ENUM(...)       | Task status |
+| `task_created_at`  | DATETIME        | Creation timestamp |
+| `task_event_id`    | INT (FK)        | Related event ID |
+
+---
+
+### `note`
+
+| Column             | Type            | Description |
+|--------------------|-----------------|-------------|
+| `note_id`          | INT (PK)        | Unique note identifier |
+| `note_title`       | VARCHAR(100)    | Note title |
+| `note_description` | LONGTEXT        | Note description |
+| `note_created_at`  | DATETIME        | Creation timestamp |
+| `note_task_id`     | INT (FK)        | Related task ID |
+
+---
+
+# Relationships
+
+- One `event` can have many `task`
+- One `task` belongs to one `event`
+- One `task` can have many `note`
+- One `note` belongs to one `task`
+
+---
+
+# Entity Relationship Overview
+
+```text
+event (1) ────────< task (1) ────────< note
+```
+
 Descripción de los principales paquetes:
 
 - `com.agenda.application`: punto de entrada de la aplicación y utilidades de arranque.

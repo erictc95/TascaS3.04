@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS event (
         'CUSTOM'
     ) DEFAULT 'NONE',
 
-    event_custom_repeat VARCHAR(100) NULL,
+    event_custom_repeat INT NULL,
 
     event_notification_minutes INT DEFAULT 30,
 

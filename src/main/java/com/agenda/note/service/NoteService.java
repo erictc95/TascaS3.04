@@ -4,7 +4,6 @@ import com.agenda.note.model.Note;
 import com.agenda.note.repository.NoteRepository;
 
 import java.util.List;
-import java.util.UUID;
 
 public class NoteService {
 

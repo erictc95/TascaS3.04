@@ -71,7 +71,7 @@ public class NoteMenu {
         String description = scanner.nextLine();
 
         System.out.println("Task id:");
-        Long taskId = scanner.nextLong();
+        int taskId = scanner.nextInt();
 
         noteService.createNote(title, description, taskId);
     }
@@ -85,7 +85,7 @@ public class NoteMenu {
 
     private void updateNote() {
         System.out.println("Note Id?");
-        Long noteId = scanner.nextLong();
+        int noteId = scanner.nextInt();
 
         System.out.println("New Title: ");
         String newTitle = scanner.nextLine();
@@ -93,16 +93,19 @@ public class NoteMenu {
         System.out.println("New Description");
         String newDescription = scanner.nextLine();
 
-        noteService.updateNote(noteId, newTitle, newDescription);
+        System.out.println("Task Id?");
+        int taskId = scanner.nextInt();
+
+        noteService.updateNote(noteId, newTitle, newDescription, taskId);
     }
 
     private void validateLongNumber() {
-        Long noteId;
+        int noteId;
     }
 
 
     private void deleteNote() {
-        Long noteId = null;
+        int noteId = 0;
 
         noteService.deleteNote(noteId);
     }
@@ -145,7 +148,7 @@ public class NoteMenu {
     }
 
     private void searchById() {
-        Long noteId = null;
+        int noteId = 0;
 
         Note resultNote;
 

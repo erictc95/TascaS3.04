@@ -3,23 +3,23 @@ package com.agenda.note.model;
 
 public class Note {
 
-    private Long id;
+    private int id;
     private String title;
     private String description;
-    private Long taskId;
+    private int taskId;
 
-    public Note(Long id, String title, String description, Long taskId) {
+    public Note(int id, String title, String description, int taskId) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.taskId = taskId;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -39,11 +39,11 @@ public class Note {
         this.description = description;
     }
 
-    public Long getTaskId() {
+    public int getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(Long taskId) {
+    public void setTaskId(int taskId) {
         this.taskId = taskId;
     }
 

@@ -4,7 +4,6 @@ import com.agenda.note.model.Note;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 
 public class NoteRepository {
@@ -22,18 +21,18 @@ public class NoteRepository {
 
     public void updateNote(Note updatedNote) {
         for (int i = 0; i < notes.size(); i++) {
-            if (notes.get(i).getId().equals(updatedNote.getId())) {
+            if (notes.get(i).getId() == updatedNote.getId()) {
                 notes.set(i, updatedNote);
             }
         }
     }
 
-    public void deleteNote(Long noteId) {
-        notes.removeIf(note -> note.getId().equals(noteId));
+    public void deleteNote(int noteId) {
+        notes.removeIf(note -> note.getId() == noteId);
     }
 
-    public Note findById(Long noteId) {
-        return notes.stream().filter(note -> note.getId().equals(noteId)).findFirst().orElse(null);
+    public Note findById(int noteId) {
+        return notes.stream().filter(note -> note.getId() == noteId).findFirst().orElse(null);
     }
 
     public List<Note> findByTitle(String title) {

@@ -42,7 +42,6 @@ public class NoteMenu {
                     break;
                 case 2:
                     listNotes();
-                    System.out.println("Listing Notes");
                     break;
                 case 3:
                     updateNote();
@@ -83,7 +82,9 @@ public class NoteMenu {
     }
 
     private void listNotes() {
-        System.out.println("List of Notes: ");
+        System.out.println();
+        System.out.println("--> Listing Notes <--");
+        System.out.println();
         List<Note> theList = noteService.getAllNotes();
 
         showNotesList(theList);

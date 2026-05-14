@@ -5,11 +5,14 @@ import com.agenda.note.model.Note;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NoteSqlRepository implements INoteRepository {
 
+    private int nextId = 1;
 
     @Override
     public void save(Note note) {
@@ -40,7 +43,42 @@ public class NoteSqlRepository implements INoteRepository {
 
     @Override
     public List<Note> findAll() {
-        return List.of();
+
+        List<Note> notes = new ArrayList<>();
+
+        String sql = """
+                SELECT * FROM note
+                """;
+        try (
+                Connection connection =
+                        ConnectionManager.getConnection();
+
+                PreparedStatement statement =
+                        connection.prepareStatement(sql);
+
+                ResultSet resultSet =
+                        statement.executeQuery()
+                ) {
+            while (resultSet.next()) {
+                Note note = new Note(
+
+                        resultSet.getInt("note_id"),
+
+                        resultSet.getString("note_title"),
+
+                        resultSet.getNString("note_description"),
+
+                        resultSet.getInt("note_task_id")
+                );
+
+                notes.add(note);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return notes;
     }
 
     @Override

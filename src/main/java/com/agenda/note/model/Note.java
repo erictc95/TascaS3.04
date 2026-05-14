@@ -49,11 +49,13 @@ public class Note {
 
     @Override
     public String toString() {
-        return "Note{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", taskId=" + taskId +
-                '}';
+        return """
+            -------------------------
+            Note Id: %d
+            Title: %s
+            Description: %s
+            Task Id: %d
+            -------------------------
+            """.formatted(id, title, description, taskId);
     }
 }

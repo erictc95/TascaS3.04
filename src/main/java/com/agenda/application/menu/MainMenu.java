@@ -9,6 +9,11 @@ import java.util.Scanner;
 public class MainMenu {
 
     private static Scanner scanner = new Scanner(System.in);
+    private final NoteMenu noteMenu;
+
+    public MainMenu(NoteMenu noteMenu) {
+        this.noteMenu = noteMenu;
+    }
 
     public void start() {
         int option;
@@ -35,7 +40,7 @@ public class MainMenu {
                     new EventMenu().show();
                     break;
                 case 3:
-                    new NoteMenu().show();
+                    noteMenu.show();
                     break;
                 case 0:
                     System.out.println("See you soon!");

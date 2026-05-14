@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class NoteRepository {
+public class NoteInMemoryRepository implements INoteRepository {
 
     private List<Note> notes = new ArrayList<>();
+    private int nextId = 1;
 
-    public void saveNote(Note note) {
+    @Override
+    public void save(Note note) {
+        note.setId(nextId++);
         notes.add(note);
         System.out.println("Note Created!");
     }
@@ -19,7 +22,8 @@ public class NoteRepository {
         return notes;
     }
 
-    public void updateNote(Note updatedNote) {
+    @Override
+    public void update(Note updatedNote) {
         for (int i = 0; i < notes.size(); i++) {
             if (notes.get(i).getId() == updatedNote.getId()) {
                 notes.set(i, updatedNote);
@@ -27,18 +31,22 @@ public class NoteRepository {
         }
     }
 
-    public void deleteNote(int noteId) {
+    @Override
+    public void delete(int noteId) {
         notes.removeIf(note -> note.getId() == noteId);
     }
 
+    @Override
     public Note findById(int noteId) {
         return notes.stream().filter(note -> note.getId() == noteId).findFirst().orElse(null);
     }
 
+    @Override
     public List<Note> findByTitle(String title) {
        return notes.stream().filter(note -> note.getTitle().equals(title)).toList();
     }
 
+    @Override
     public List<Note> findByWord(String word) {
         return notes.stream().filter(note -> note.getDescription().contains(word)).toList();
     }

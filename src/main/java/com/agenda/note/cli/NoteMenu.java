@@ -1,6 +1,7 @@
 package com.agenda.note.cli;
 
 import com.agenda.note.model.Note;
+import com.agenda.note.service.INoteService;
 import com.agenda.note.service.NoteService;
 
 import java.util.List;
@@ -9,7 +10,11 @@ import java.util.Scanner;
 public class NoteMenu {
 
     private static Scanner scanner = new Scanner(System.in);
-    private NoteService noteService = new NoteService();
+    private final INoteService noteService;
+
+    public NoteMenu(INoteService noteService) {
+        this.noteService = noteService;
+    }
 
     public void show() {
 
@@ -72,6 +77,7 @@ public class NoteMenu {
 
         System.out.println("Task id:");
         int taskId = scanner.nextInt();
+        scanner.nextLine();
 
         noteService.createNote(title, description, taskId);
     }
@@ -86,6 +92,8 @@ public class NoteMenu {
     private void updateNote() {
         System.out.println("Note Id?");
         int noteId = scanner.nextInt();
+        scanner.nextLine();
+
 
         System.out.println("New Title: ");
         String newTitle = scanner.nextLine();
@@ -95,19 +103,16 @@ public class NoteMenu {
 
         System.out.println("Task Id?");
         int taskId = scanner.nextInt();
+        scanner.nextLine();
 
-        noteService.updateNote(noteId, newTitle, newDescription, taskId);
-    }
-
-    private void validateLongNumber() {
-        int noteId;
+        noteService.update(noteId, newTitle, newDescription, taskId);
     }
 
 
     private void deleteNote() {
         int noteId = 0;
 
-        noteService.deleteNote(noteId);
+        noteService.delete(noteId);
     }
 
     private void searchMenu() {
@@ -148,7 +153,9 @@ public class NoteMenu {
     }
 
     private void searchById() {
-        int noteId = 0;
+        System.out.println("Note ID?");
+        int noteId = scanner.nextInt();
+        scanner.nextLine();
 
         Note resultNote;
 

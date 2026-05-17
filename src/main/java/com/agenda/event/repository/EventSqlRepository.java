@@ -1,5 +1,6 @@
 package com.agenda.event.repository;
 
+import com.agenda.common.exception.EventRepositoryException;
 import com.agenda.event.model.Event;
 import com.agenda.infrastructure.sql.ConnectionManager;
 
@@ -56,7 +57,7 @@ public class EventSqlRepository implements EventRepository{
             return event.getId();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error saving event", e);
+            throw new EventRepositoryException("Error saving event", e);
         }
     }
 }

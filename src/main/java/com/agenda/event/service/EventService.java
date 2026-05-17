@@ -1,5 +1,6 @@
 package com.agenda.event.service;
 
+import com.agenda.common.exception.EventValidationException;
 import com.agenda.event.dto.CreateEventCommand;
 import com.agenda.event.model.Event;
 import com.agenda.event.model.EventRepeatType;
@@ -20,15 +21,15 @@ public class EventService {
 
     public int createEvent(CreateEventCommand newEvent) {
         if (newEvent == null) {
-            throw new IllegalArgumentException("CreateEventCommand cannot be null.");
+            throw new EventValidationException("CreateEventCommand cannot be null.");
         }
 
         if (newEvent.endDate() != null && newEvent.endDate().isBefore(newEvent.startDate())) {
-            throw new IllegalArgumentException("End date cannot be before start date.");
+            throw new EventValidationException("End date cannot be before start date.");
         }
 
         if(newEvent.eventCustomRepeatDays() < 0 || (newEvent.repeatType() == EventRepeatType.CUSTOM && newEvent.eventCustomRepeatDays() == 0)) {
-            throw new IllegalArgumentException("Invalid custom repeat days.");
+            throw new EventValidationException("Invalid custom repeat days.");
         }
 
         Event event = new Event(

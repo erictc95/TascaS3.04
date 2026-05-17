@@ -1,10 +1,21 @@
 package com.agenda.event.cli;
 
-import java.util.Scanner;
+import com.agenda.common.cli.InputReader;
+import com.agenda.event.dto.CreateEventCommand;
+import com.agenda.event.model.EventRepeatType;
+import com.agenda.event.service.EventService;
+
+import java.sql.SQLOutput;
+import java.time.LocalDateTime;
 
 public class EventMenu {
 
-    private static Scanner scanner = new Scanner(System.in);
+    private final EventService eventService;
+
+    public EventMenu(EventService eventService) {
+        this.eventService = eventService;
+    }
+
 
     public void show() {
 
@@ -21,10 +32,8 @@ public class EventMenu {
             System.out.println("5. Search Event by Date");
             System.out.println("0. Back");
             System.out.println();
-            System.out.print("Select an option: ");
 
-            option = scanner.nextInt();
-            scanner.nextLine();
+            option = InputReader.readInt("Select an option: ");
 
             switch (option) {
                 case 1:
@@ -60,5 +69,32 @@ public class EventMenu {
     }
 
     private void createEvent() {
+        String name = InputReader.readNonEmptyString("Name: ");
+        String description = InputReader.readString("Description: ");
+        LocalDateTime start = InputReader.readDateTime("Start date (yyyy-MM-dd HH:mm): ");
+        LocalDateTime end = InputReader.readOptionalDateTime("End date (yyyy-MM-dd HH:mm): ");
+        String location = InputReader.readString("Location: ");
+        EventRepeatType repeatType = InputReader.readEnum("Repeat type (NONE, YEARLY, CUSTOM): ", EventRepeatType.class);
+        int customRepeat = 0;
+        if (repeatType == EventRepeatType.CUSTOM) {
+            customRepeat = InputReader.readInt("Custom days: ");
+        }
+
+        Integer notificationMinutes = InputReader.readOptionalInt("Notification minutes: ");
+
+        CreateEventCommand newEvent = new CreateEventCommand(
+                name,
+                description,
+                start,
+                end,
+                location,
+                repeatType,
+                customRepeat,
+                notificationMinutes
+        );
+
+        int id = eventService.createEvent(newEvent);
+
+        System.out.println("Event created with id: " + id);
     }
 }

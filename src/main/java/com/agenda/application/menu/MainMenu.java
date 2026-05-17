@@ -1,6 +1,9 @@
 package com.agenda.application.menu;
 
 import com.agenda.event.cli.EventMenu;
+import com.agenda.event.repository.EventRepository;
+import com.agenda.event.repository.EventSqlRepository;
+import com.agenda.event.service.EventService;
 import com.agenda.note.cli.NoteMenu;
 import com.agenda.task.cli.TaskMenu;
 
@@ -9,6 +12,10 @@ import java.util.Scanner;
 public class MainMenu {
 
     private static Scanner scanner = new Scanner(System.in);
+
+    EventRepository eventRepository = new EventSqlRepository();
+    EventService eventService = new EventService(eventRepository);
+
 
     public void start() {
         int option;
@@ -32,7 +39,7 @@ public class MainMenu {
                     new TaskMenu().show();
                     break;
                 case 2:
-                    new EventMenu().show();
+                    new EventMenu(eventService).show();
                     break;
                 case 3:
                     new NoteMenu().show();

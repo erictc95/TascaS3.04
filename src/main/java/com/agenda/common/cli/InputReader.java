@@ -104,4 +104,20 @@ public class InputReader {
         }
     }
 
+    public static Integer readOptionalInt(String message) {
+        while (true) {
+            System.out.print(message);
+            String input = SCANNER.nextLine().trim();
+
+            if (input.isEmpty()) {
+                return null;
+            }
+
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println(ERROR_MESSAGE);
+            }
+        }
+    }
 }

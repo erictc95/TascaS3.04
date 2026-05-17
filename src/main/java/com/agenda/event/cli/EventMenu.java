@@ -3,10 +3,19 @@ package com.agenda.event.cli;
 import com.agenda.common.cli.InputReader;
 import com.agenda.event.dto.CreateEventCommand;
 import com.agenda.event.model.EventRepeatType;
+import com.agenda.event.service.EventService;
 
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 
 public class EventMenu {
+
+    private final EventService eventService;
+
+    public EventMenu(EventService eventService) {
+        this.eventService = eventService;
+    }
+
 
     public void show() {
 
@@ -84,8 +93,8 @@ public class EventMenu {
                 notificationMinutes
         );
 
-        eventService.createEvent(newEvent);
+        int id = eventService.createEvent(newEvent);
 
-
+        System.out.println("Event created with id: " + id);
     }
 }

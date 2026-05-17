@@ -12,6 +12,6 @@ public record CreateEventCommand(
         String location,
         EventRepeatType repeatType,
         int eventCustomRepeatDays,
-        int eventNotificationMinutes
+        Integer eventNotificationMinutes
 ) {
 }
